@@ -44,6 +44,9 @@ namespace Renci.SshNet.NetConf
                                                         "<capability>" +
                                                             "urn:ietf:params:netconf:base:1.0" +
                                                         "</capability>" +
+                                                        "<capability>" +
+                                                            "urn:ietf:params:netconf:base:1.1" +
+                                                        "</capability>" +
                                                     "</capabilities>" +
                                                 "</hello>");
 
@@ -109,7 +112,7 @@ namespace Renci.SshNet.NetConf
 
             if (ServerCapabilities == null)   // This must be server capabilities, old protocol
             {
-                _data.Append(chunk);  
+                _data.Append(chunk);
 
                 if (!chunk.Contains(Prompt))
                 {
@@ -117,7 +120,7 @@ namespace Renci.SshNet.NetConf
                 }
                 try
                 {
-                    chunk = _data.ToString(); 
+                    chunk = _data.ToString();
                     _data.Clear();
 
                     ServerCapabilities = new XmlDocument();
@@ -164,7 +167,7 @@ namespace Renci.SshNet.NetConf
                     return;
                     //throw new NetConfServerException("Server XML message does not end with the prompt " + _prompt);
                 }
-                
+
                 chunk = _data.ToString();
                 _data.Clear();
 
